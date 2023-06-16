@@ -1,11 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function GridData({ data }) {
     return (
         <>
             <section className="container flex flex-row justify-between items-center flex-wrap w-full md:max-lg:flex-col md:max-lg:justify-center sm:max-lg:flex-col sm:max-lg:justify-center">
-                {data.map((element) => (
+                { data.map((element) => (
+                    <Link href={"/"+element.name}>
                     <div className="flex flex-col items-start bg-slate-700 rounded-lg overflow-hidden m-5 w-60 h-full">
                         <Image
                             src={element.flags.svg}
@@ -33,6 +35,7 @@ export default function GridData({ data }) {
                             </p>
                         </div>
                     </div>
+                    </Link>
                 ))}
             </section>
         </>

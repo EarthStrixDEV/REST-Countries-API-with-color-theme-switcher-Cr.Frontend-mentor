@@ -9,7 +9,7 @@ export async function getStaticProps() {
     console.log(data_response);
     return {
         props: {
-            country: data_response,
+            country: data_response.country,
         },
     };
 } 
