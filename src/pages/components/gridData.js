@@ -1,34 +1,39 @@
-import { useState, useEffect } from "react";
 import Image from "next/image";
-import axios from "axios";
+import { useState, useEffect } from "react";
 
-export default async function gridData() {
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-            fetch("../api/data.json")
-            .then((response) => {
-                console.log(response.data)
-                setData(response.data)
-            })
-            .catch((err) => console.error(err));
-    },[])
-
+export default function GridData({ data }) {
     return (
         <>
-            <section className="grid grid-cols-4 grid-rows-2 gap-4">
-                { data.map((data) => {
-                    <div className="flex flex-col items-center">
-                        <Image src={data.flags.png} />
-                        <div className="flex flex-col justify-start items-start">
-                            <h3>{ data.name }</h3>
-                            <p>Population: { data.population }</p>
-                            <p>Region: { data.region }</p>
-                            <p>Capital: { data.capital }</p>
+            <section className="container flex flex-row justify-between items-center flex-wrap w-full md:max-lg:flex-col md:max-lg:justify-center sm:max-lg:flex-col sm:max-lg:justify-center">
+                {data.map((element) => (
+                    <div className="flex flex-col items-start bg-slate-700 rounded-lg overflow-hidden m-5 w-60 h-full">
+                        <Image
+                            src={element.flags.svg}
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "fill",
+                            }}
+                        />
+                        <div className="p-5">
+                            <h2 className="pb-3 text-lg font-semibold">
+                                {element.name}
+                            </h2>
+                            <p className="py-1 text-sm">
+                                Population: {element.population}
+                            </p>
+                            <p className="py-1 text-sm">
+                                Region: {element.region}
+                            </p>
+                            <p className="py-1 text-sm">
+                                Capital: {element.capital}
+                            </p>
                         </div>
                     </div>
-                })}
-                <h1></h1>
+                ))}
             </section>
         </>
     );
