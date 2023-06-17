@@ -1,11 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { readFile } from "fs/promises";
-import path from "path";
-
-const dataFilePath = path.join(process.cwd(), "./data.json");
+import jsonData from "../../../data.json";
 
 export default async function handler(req, res) {
-    const jsonData = await readFile(dataFilePath);
-    const objectData = JSON.parse(jsonData);
-    res.status(200).json(objectData);
+    res.status(200).json(jsonData);
 }
