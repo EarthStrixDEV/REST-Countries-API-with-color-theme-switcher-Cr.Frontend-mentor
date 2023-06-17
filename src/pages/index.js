@@ -1,8 +1,7 @@
-import Menu from "./components/Navbar";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import Navbar from "./components/Navbar";
+import Header from "./components/MenuHeader";
 import { useState ,useEffect } from "react";
 
 export async function getStaticProps() {
@@ -13,7 +12,7 @@ export async function getStaticProps() {
             country: data_response,
         },
     };
-} 
+}
 
 export default function Home({ country }) {
     const [Data, setData] = useState([]);
@@ -40,7 +39,7 @@ export default function Home({ country }) {
                 />
             </Head>
             <main className="flex flex-col items-center justify-between bg-gray-800">
-                <Navbar onStateComponent={handleChildStateChange} />
+                <Header onStateComponent={handleChildStateChange} />
                 <section className="container flex flex-row justify-between items-center flex-wrap w-full md:max-lg:flex-col md:max-lg:justify-center sm:max-lg:flex-col sm:max-lg:justify-center">
                     {Data.map((element) => (
                         <Link href={"/" + element.name}>
