@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
 import MainHeader from "./MainHeader";
-export default function Header({ onStateComponent }) {
+export default function Header({ onStateComponent, onStateInputComponent }) {
     const [Toggle, setToggle] = useState(false);
     const [ChildComponent, setChildComponent] = useState("");
+    const [ChildInputComponent, setChildInput] = useState("");
 
     function handleSetToggle() {
         setToggle(!Toggle);
     }
+
+    const handleStateInputSearch = (event) => {
+        const result = event.target.value;
+        setChildInput(result);
+        onStateInputComponent(result);
+    };
 
     const handleStateSelected = (region) => {
         setChildComponent(region);
@@ -34,6 +41,7 @@ export default function Header({ onStateComponent }) {
                         name="search"
                         className="bg-gray-700 p-2 text-white text-base focus:outline-0"
                         placeholder="Search for a country..."
+                        onChange={handleStateInputSearch}
                     />
                 </div>
                 <button
@@ -63,23 +71,33 @@ export default function Header({ onStateComponent }) {
                         <button
                             onClick={() => handleStateSelected("Africa")}
                             className="text-sm text-slate-400 pr-24 pl-2 py-1 cursor-pointer hover:bg-slate-800 w-full rounded-lg text-start"
-                        >Africa</button>
+                        >
+                            Africa
+                        </button>
                         <button
                             onClick={() => handleStateSelected("Americas")}
                             className="text-sm text-slate-400 pr-24 pl-2 py-1 cursor-pointer hover:bg-slate-800 w-full rounded-lg text-start"
-                        >America</button>
+                        >
+                            America
+                        </button>
                         <button
                             onClick={() => handleStateSelected("Asia")}
                             className="text-sm text-slate-400 pr-24 pl-2 py-1 cursor-pointer hover:bg-slate-800 w-full rounded-lg text-start"
-                        >Asia</button>
+                        >
+                            Asia
+                        </button>
                         <button
                             onClick={() => handleStateSelected("Europe")}
                             className="text-sm text-slate-400 pr-24 pl-2 py-1 cursor-pointer hover:bg-slate-800 w-full rounded-lg text-start"
-                        >Europe</button>
+                        >
+                            Europe
+                        </button>
                         <button
                             onClick={() => handleStateSelected("Oceania")}
                             className="text-sm text-slate-400 pr-24 pl-2 py-1 cursor-pointer hover:bg-slate-800 w-full rounded-lg text-start"
-                        >Oceania</button>
+                        >
+                            Oceania
+                        </button>
                     </div>
                 ) : (
                     <div className="absolute"></div>

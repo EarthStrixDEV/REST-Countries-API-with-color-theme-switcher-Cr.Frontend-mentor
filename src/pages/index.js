@@ -17,6 +17,7 @@ export async function getStaticProps() {
 export default function Home({ country }) {
     const [Data, setData] = useState([]);
     const [parentState, setParentState] = useState("");
+    const [parentInputState, setParentInputState] = useState("");
 
     useEffect(() => {
         setData(country);
@@ -27,6 +28,14 @@ export default function Home({ country }) {
         const filtered = country.filter((item) => item.region === parentState);
         setData(filtered);
     };
+
+    const handleChildInputChange = (childState) => {
+        setParentInputState(childState);
+        const result = country.filter((item) =>
+            item.name.toLowerCase().includes(parentInputState.toLowerCase())
+        );
+        setData(result);
+    }
 
     return (
         <>
@@ -39,7 +48,7 @@ export default function Home({ country }) {
                 />
             </Head>
             <main className="flex flex-col items-center justify-between bg-gray-800">
-                <Header onStateComponent={handleChildStateChange} />
+                <Header onStateComponent={handleChildStateChange} onStateInputComponent={handleChildInputChange} />
                 <section className="container flex flex-row justify-between items-center flex-wrap w-full md:max-lg:flex-col md:max-lg:justify-center sm:max-lg:flex-col sm:max-lg:justify-center">
                     {Data.map((element) => (
                         <Link href={"/" + element.name}>
